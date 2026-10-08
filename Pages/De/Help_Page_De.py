@@ -18,8 +18,6 @@ def help_page_de_view(calc_page_de):
 
     st.divider()
 
-    # Empty placeholder section for you to fill out
-    #
     st.title("Anleitung & Informationen")
     video_de, video_en = st.columns(2)
     with video_de:
