@@ -1,16 +1,9 @@
-import math
 from pathlib import Path
-import pandas as pd
+
 import streamlit as st
-from Utilities.pdf_helpers_De import generate_pdf_report_De
-from Utilities.pdf_helpers_En import generate_pdf_report_En
-from Utilities.calculator_de import main_calculator_de
-from app import calc_page_de
 
 
-
-
-def help_page_de_view():
+def help_page_de_view(calc_page_de):
     col_title, col_btn = st.columns([0.8, 0.2])
     with col_title:
         st.title("❓ Hilfe & Dokumentation")
@@ -36,4 +29,4 @@ def help_page_de_view():
         st.header("Video-Tutorial auf Englisch")
         st.video("https://www.youtube.com/watch?v=aYwB4hNAf7A", width=500)
     st.info("Erklären des Mathematik und wie die Formelle funktionieren im Online-Rechner.")
-    st.image(Path(__file__).parent / "photos" / "400VAmps.png")
+    st.image(Path(__file__).resolve().parents[2] / "photos" / "400VAmps.png")
