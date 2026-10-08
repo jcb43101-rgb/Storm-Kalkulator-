@@ -17,13 +17,14 @@ def main_calculator():
     col_title, col_btn = st.columns([0.8, 0.2])
     with col_title:
         st.title("⚡ Filmset Strom- & Lastenrechner")
-        st.info("*Wichtige Hinweise* das Rechner ist ein Werkzeug zur Vorplanung und "
-                    "ersetzt keine professionelle Elektroplanung. "
-                    "Bitte prüfe alle Berechnungen und Empfehlungen sorgfältig.")
     with col_btn:
         st.write("")  # Vertical spacing adjustment
         if st.button("❓ Hilfe / Info", use_container_width=True):
             st.switch_page(help_page)
+
+    st.info("*Wichtige Hinweise* das Rechner ist ein Werkzeug zur Vorplanung und "
+                        "ersetzt keine professionelle Elektroplanung. "
+                        "Bitte prüfe alle Berechnungen und Empfehlungen sorgfältig.")
 
     st.write(
         "Füge deine Set-Geräte unten ein, um Ein- und Drehstromlasten zu berechnen, "
@@ -56,6 +57,9 @@ def main_calculator():
 
     # --- Interaktiver Dateneditor ---
     st.subheader("Geräteliste")
+    st.info("Es ist sehr wichtig, dass des Wert der Leistungs ist auf Watt (W) " 
+    "und nicht auf Kilowatt (kW) eingestellt ist. " 
+    "Um Watt in Kilowatt umzurechnen, teile die Wattzahl durch 1000. Beispiel: 1500 W = 1,5 kW.")
     default_data = pd.DataFrame(
         [
             {
