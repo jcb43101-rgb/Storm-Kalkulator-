@@ -35,6 +35,10 @@ def apply_header_styles():
             width: max-content !important;
             max-width: 100%;
         }
+        .st-key-language_selection {
+            flex: 0 0 156px !important;
+            max-width: 156px;
+        }
         .st-key-language_selection [data-baseweb="select"] {
             width: max-content !important;
             max-width: 100%;
@@ -61,10 +65,6 @@ def apply_header_styles():
                 flex: 1 1 100% !important;
                 width: 100% !important;
                 min-width: 0 !important;
-            }
-            .st-key-language_selection {
-                flex: 0 0 156px !important;
-                max-width: 156px;
             }
         }
         </style>
