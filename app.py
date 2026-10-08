@@ -46,31 +46,16 @@ st.subheader("Geräteliste")
 default_data = pd.DataFrame(
     [
         {
-            "Gerätename": "ARRI SkyPanel S60-C",
+            "Gerätename": "Beispielleuchte ",
             "Abteilung": "Licht",
             "Anzahl": 4,
             "Leistung_W": 420,
             "Power_Factor": 0.99,
             "Spannung_V": 230,
         },
+        
         {
-            "Gerätename": "ARRI M18 HMI",
-            "Abteilung": "Licht",
-            "Anzahl": 2,
-            "Leistung_W": 1800,
-            "Power_Factor": 0.98,
-            "Spannung_V": 230,
-        },
-        {
-            "Gerätename": "ARRI M40 HMI (400V 3-Phase)",
-            "Abteilung": "Licht",
-            "Anzahl": 1,
-            "Leistung_W": 4000,
-            "Power_Factor": 0.98,
-            "Spannung_V": 400,
-        },
-        {
-            "Gerätename": "Tonwagen & Empfänger",
+            "Gerätename": "Beispiel-Lautsprecher",
             "Abteilung": "Ton",
             "Anzahl": 1,
             "Leistung_W": 250,
@@ -78,7 +63,7 @@ default_data = pd.DataFrame(
             "Spannung_V": 230,
         },
         {
-            "Gerätename": "DIT-Station & Referenzmonitore",
+            "Gerätename": "Beispielkamera",
             "Abteilung": "Kamera / Video",
             "Anzahl": 1,
             "Leistung_W": 850,
@@ -86,8 +71,16 @@ default_data = pd.DataFrame(
             "Spannung_V": 230,
         },
         {
-            "Gerätename": "Gastro-Kaffeemaschine (Espresso, Siebträger)",
+            "Gerätename": "Beispiel Catering-Ausstattung",
             "Abteilung": "Catering",
+            "Anzahl": 1,
+            "Leistung_W": 2800,
+            "Power_Factor": 1.00,
+            "Spannung_V": 230,
+        },
+        {
+            "Gerätename": "Beispiel Production-Ausstattung",
+            "Abteilung": "Produktion",
             "Anzahl": 1,
             "Leistung_W": 2800,
             "Power_Factor": 1.00,
