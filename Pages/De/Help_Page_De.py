@@ -35,25 +35,25 @@ def Help_Page_View_De(calc_page_de, help_page_de, help_page_en):
     st.divider()
 
     st.markdown(
-            """
-            <style>
-            .st-key-tutorial_titles :is(h1, h2, h3, h4, h5, h6) {
-                white-space: nowrap;
-                font-size: 1.7rem;
-            }
-            .st-key-tutorial_titles [data-testid="stColumn"]:last-child h1 {
-                text-align: right;
-            }
-            </style>
-            """,
-            unsafe_allow_html=True,
-        )
+        """
+        <style>
+        .st-key-tutorial_titles :is(h1, h2, h3, h4, h5, h6) {
+            white-space: nowrap;
+            font-size: 1.7rem;
+        }
+        .st-key-tutorial_titles [data-testid="stColumn"]:last-child h1 {
+            text-align: right;
+        }
+        </style>
+        """,
+        unsafe_allow_html=True,
+    )
     with st.container(key="tutorial_titles"):
-            tutorial_text_title, tutorial_video_title = st.columns([2.5, 1])
-    with tutorial_text_title:
-                st.title("Anleitung & Informationen")
-    with tutorial_video_title:
-                st.title("Video-Tutorial auf Deutsch")
+        tutorial_text_title, tutorial_video_title = st.columns([2.5, 1])
+        with tutorial_text_title:
+            st.title("Anleitung & Informationen")
+        with tutorial_video_title:
+            st.title("Video-Tutorial auf Deutsch")
     
     tutorial_text, tutorial_video = st.columns([2.5, 1], wrap=False)
             
