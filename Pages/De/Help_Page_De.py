@@ -1,16 +1,18 @@
 from pathlib import Path
+from Pages.De import Calc_Page_De
+from Pages.De.Calc_Page_De import Calc_Page_View_De
 
 import streamlit as st
 
 
-def help_page_de_view(calc_page_de):
+def Help_Page_View_De(Calc_Page_View_De):
     col_title, col_btn = st.columns([0.8, 0.2])
     with col_title:
         st.title("❓ Hilfe & Dokumentation")
     with col_btn:
         st.write("")
         if st.button("⬅️ Zurück zum Rechner", use_container_width=True):
-            st.switch_page(calc_page_de)
+            st.switch_page(Calc_Page_De)
 
     st.info("*Wichtige Hinweise* das Rechner ist ein Werkzeug zur Vorplanung und "
             "ersetzt keine professionelle Elektroplanung. "

@@ -1,24 +1,44 @@
 import streamlit as st
-from Utilities.calculator_de import main_calculator_de
-from Pages.De.Help_Page_De import help_page_de_view
 
+######## De Page Imports
 
-def run_calculator_page():
-    main_calculator_de(help_page_de)
+from Pages.De.Calc_Page_De import Calc_Page_View_De
+from Pages.De.Help_Page_De import help_page_view_de
 
+#########   En Page Imports
 
-def run_help_page():
-    help_page_de_view(calc_page_de)
+from Pages.En.Help_Page_En import Help_Page_View_En
+from Pages.En.Calc_Page_En import Calc_Page_View_En
+
+##########  Utilities Imports
+from Utilities import Master_Calc
+
+########## App Function
+
+def run_calc_page_de():
+    Calc_Page_View_De(help_page_view_de)
+
+def run_help_page_de():
+    help_page_view_de(Calc_Page_View_De)
+
+def run_calc_page_en():
+    Calc_Page_View_En(Help_Page_View_En)
+
+def run_help_page_en():
+    Help_Page_View_En(Calc_Page_View_En)
 
 
 # Set page config at the entrypoint
+
 st.set_page_config(page_title="Filmlicht & Stromrechner", layout="wide")
 
 # --- Page Definitions ---
 
 # --- Page Routing Setup ---
-calc_page_de = st.Page(run_calculator_page, title="Stromrechner", icon="⚡", default=True)
-help_page_de = st.Page(run_help_page, title="Hilfe", icon="❓")
+calc_page_de = st.Page(run_calc_page_de, title="Stromrechner", icon="⚡", default=True)
+help_page_de = st.Page(run_help_page_de, title="Hilfe", icon="❓")
+calc_page_en = st.Page(run_calc_page_en, title="Power Calculator", icon="⚡")
+help_page_en = st.Page(run_help_page_en, title="Help", icon="❓")
 
 # Set position="hidden" to completely remove the sidebar navigation UI
 pg = st.navigation([calc_page_de, help_page_de], position="hidden")
