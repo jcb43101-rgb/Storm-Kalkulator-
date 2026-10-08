@@ -37,11 +37,30 @@ def Help_Page_View_En(calc_page_en, help_page_de, help_page_en):
     st.divider()
 
     st.title("Instructions & Information")
-
+tutorial_text, tutorial_video = st.columns([3, 1])
+ 
+with tutorial_text:
+    st.text("In order to calculate the Load you will need to supply all your devices on your film set," 
+    "the first thing you need to do is create an inventory list of every device and its technical specs." 
+    "The most important specs to include are: Wattage, Amps, if it is 1 or 3 phasic and if its AC or DC." 
+    "You also need to include how many of each device you are going to be using, and if on a larger set," 
+    "which department the device belongs to, i.e. Production, audio, video, catering, or lighting." 
+    "You can create this list on our online calculator but it does not automatically save, so be careful," 
+    "refreshing the page will cause the data to be reset! You can also create a csv file with the device list" 
+    "data and upload it to be automatically filled into our calculator. As you are filling in the device list" 
+    "on the calculator page, our mathematical algorithm automatically updates the calculations at the bottom"
+    "of the page to take all the devices into account. You can then sort by different views of the data," 
+    "including specs per device or by department. If you are using 3phase power or generators there is also" 
+    "a tab to recommend a way to divide the devices among the three phases to ensure that power is distributed" 
+    "equally. Each phase should be within 10% kVA of one another. The last tab is where you can export a pdf"
+    "of the data from your device list, there are four different structures and you can choose which one or"
+    "(four) fit your needs best. You can then print and distribute the pdfs to your team!The specific math"
+    "formulations we use in our algorithm will be shared below." "Break a Leg!")
+ 
+with tutorial_video:
     st.header("Video Tutorial in English")
-
     st.video("https://www.youtube.com/watch?v=aYwB4hNAf7A", width=500)
 
-    st.info("Learn about the math and formulas used in the online calculator.")
+st.info("Learn about the math and formulas used in the online calculator.")
     
-    st.image(Path(__file__).resolve().parents[2] / "photos" / "400VAmps.png")
+st.image(Path(__file__).resolve().parents[2] / "photos" / "400VAmps.png")
