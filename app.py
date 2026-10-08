@@ -2,8 +2,7 @@ import math
 from pathlib import Path
 import pandas as pd
 import streamlit as st
-from Utilities.pdf_helpers import generate_pdf_report_De
-from Utilities.pdf_helpers import generate_pdf_report_En
+from Utilities.pdf_helpers_De import generate_pdf_report_De
 from Utilities.calculator_de import main_calculator_de
 from Pages.De.Help_Page_De import help_page_de_view
 
