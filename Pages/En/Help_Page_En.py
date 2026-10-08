@@ -67,15 +67,15 @@ def Help_Page_View_En(calc_page_en, help_page_de, help_page_en):
         "which department the device belongs to, i.e. Production, audio, video, catering, or lighting. " 
         "You can create this list on our online calculator but it does not automatically save, so be careful," 
         "refreshing the page will cause the data to be reset! You can also create a csv file with the device list " 
-        "data and upload it to be automatically filled into our calculator. As you are filling in the device list " 
+        "data and upload it to be automatically filled into our calculator.\n\n""As you are filling in the device list " 
         "on the calculator page, our mathematical algorithm automatically updates the calculations at the bottom "
         "of the page to take all the devices into account. You can then sort by different views of the data, " 
-        "including specs per device or by department. If you are using 3phase power or generators there is also " 
+        "including specs per device or by department.\n\n" "If you are using 3phase power or generators there is also " 
         "a tab to recommend a way to divide the devices among the three phases to ensure that power is distributed " 
-        "equally. Each phase should be within 10% kVA of one another. The last tab is where you can export a pdf "
+"equally. Each phase should be within 10% kVA of one another. \n\n" "The last tab is where you can export a pdf "
         "of the data from your device list, there are four different structures and you can choose which one or "
-        "(four) fit your needs best. You can then print and distribute the pdfs to your team!The specific math "
-        "formulations we use in our algorithm will be shared below." "Break a Leg! ")
+        "(four) fit your needs best. You can then print and distribute the pdfs to your team!\n\n" "The specific math "
+        "formulations we use in our algorithm will be shared below. \n\n" "Break a Leg! ")
         st.info("Learn about the math and formulas used in the online calculator.")
     
     with tutorial_video:
