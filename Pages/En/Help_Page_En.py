@@ -41,7 +41,7 @@ def Help_Page_View_En(calc_page_en, help_page_de, help_page_en):
         <style>
         .st-key-tutorial_titles :is(h1, h2, h3, h4, h5, h6) {
             white-space: nowrap;
-            font-size: 1.25rem;
+            font-size: 3rem;
         }
         </style>
         """,
@@ -50,9 +50,9 @@ def Help_Page_View_En(calc_page_en, help_page_de, help_page_en):
     with st.container(key="tutorial_titles"):
         tutorial_text_title, tutorial_video_title = st.columns(2)
         with tutorial_text_title:
-            st.subheader("Instructions & Information")
+            st.title("Instructions & Information")
         with tutorial_video_title:
-            st.subheader("Video Tutorial in English")
+            st.title("Video Tutorial in English")
 
     tutorial_text, tutorial_video = st.columns([2.5, 1], wrap=False)
         
