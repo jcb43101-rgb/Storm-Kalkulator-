@@ -2,20 +2,27 @@ import pandas as pd
 import streamlit as st
 
 from Utilities.Master_Calc import render_calculations
-from Utilities.Language_Selection import language_selection
+from Utilities.Language_Selection import apply_header_styles, language_selection
 
 
 def Calc_Page_View_En(help_page_en, calc_page_de, calc_page_en):
-    col_title, col_language, col_btn = st.columns(
-        [0.70, 0.20, 0.10], vertical_alignment="bottom", wrap=False
+    apply_header_styles()
+    col_title, col_controls = st.columns(
+        [0.74, 0.26], vertical_alignment="bottom", wrap=False
     )
     with col_title:
         st.title("⚡ Film Set Power & Load Calculator")
-    with col_language:
-        language_selection(calc_page_de, calc_page_en, "English")
-    with col_btn:
-        if st.button("Help", width="content", key="header_navigation_button"):
-            st.switch_page(help_page_en)
+    with col_controls:
+        with st.container(
+            horizontal=True,
+            horizontal_alignment="right",
+            vertical_alignment="bottom",
+            gap="small",
+            key="header_controls",
+        ):
+            language_selection(calc_page_de, calc_page_en, "English")
+            if st.button("Help", width="content", key="header_navigation_button"):
+                st.switch_page(help_page_en)
 
     st.info(
         "**Important:** This calculator is a planning aid and does not replace "

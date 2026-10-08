@@ -10,12 +10,7 @@ def _switch_language(german_page, english_page):
     st.switch_page(pages[selected_language])
 
 
-def language_selection(german_page, english_page, current_language):
-    st.session_state["language_selection"] = None
-    language_options = {
-        "Deutsch": "Deutsch 🇩🇪",
-        "English": "English 🇬🇧",
-    }
+def apply_header_styles():
     st.markdown(
         """
         <style>
@@ -39,27 +34,53 @@ def language_selection(german_page, english_page, current_language):
         }
         .st-key-language_selection [data-baseweb="select"] {
             width: max-content !important;
+            max-width: 100%;
         }
         .st-key-language_selection [data-testid="stSelectbox"] input {
             caret-color: transparent !important;
         }
-        .st-key-header_navigation_button {
-            width: 100% !important;
-            transform: translateX(0.625rem);
+        .st-key-header_controls {
+            gap: 0.5rem !important;
+            position: relative;
+            left: 0.625rem;
         }
-        .st-key-header_navigation_button [data-testid="stButton"] {
-            display: flex;
-            justify-content: flex-end;
-            width: 100%;
+        .st-key-header_navigation_button {
+            width: fit-content !important;
         }
         .st-key-header_navigation_button [data-testid="stBaseButton-secondary"] {
             width: fit-content !important;
             flex: 0 0 auto;
         }
+        @media (max-width: 950px) {
+            .stHorizontalBlock:has(> [data-testid="stColumn"] h1) {
+                flex-wrap: wrap !important;
+            }
+            .stHorizontalBlock:has(> [data-testid="stColumn"] h1)
+            > [data-testid="stColumn"] {
+                flex: 1 1 100% !important;
+                width: 100% !important;
+                min-width: 0 !important;
+            }
+            .st-key-language_selection {
+                flex: 0 0 156px !important;
+                max-width: 156px;
+            }
+            .st-key-header_controls {
+                left: 0;
+            }
+        }
         </style>
         """,
         unsafe_allow_html=True,
     )
+
+
+def language_selection(german_page, english_page, current_language):
+    st.session_state["language_selection"] = None
+    language_options = {
+        "Deutsch": "Deutsch 🇩🇪",
+        "English": "English 🇬🇧",
+    }
     placeholder = (
         "Sprache wählen 🇩🇪"
         if current_language == "Deutsch"
