@@ -14,7 +14,7 @@ def Help_Page_View_De(calc_page_de, help_page_de, help_page_en):
     with col_language:
         language_selection(help_page_de, help_page_en, "Deutsch")
     with col_btn:
-        if st.button("Zurück", width="content"):
+        if st.button("Zurück", width="content", key="header_navigation_button"):
             st.switch_page(calc_page_de)
 
     st.info("*Wichtige Hinweise* das Rechner ist ein Werkzeug zur Vorplanung und "

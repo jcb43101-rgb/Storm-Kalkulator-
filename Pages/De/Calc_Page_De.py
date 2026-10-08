@@ -14,7 +14,7 @@ def Calc_Page_View_De(help_page_de, calc_page_de, calc_page_en):
     with col_language:
         language_selection(calc_page_de, calc_page_en, "Deutsch")
     with col_btn:
-        if st.button("Hilfe", width="content"):
+        if st.button("Hilfe", width="content", key="header_navigation_button"):
             st.switch_page(help_page_de)
 
     st.info("*Wichtige Hinweise* das Rechner ist ein Werkzeug zur Vorplanung und "

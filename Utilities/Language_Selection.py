@@ -43,6 +43,19 @@ def language_selection(german_page, english_page, current_language):
         .st-key-language_selection [data-testid="stSelectbox"] input {
             caret-color: transparent !important;
         }
+        .st-key-header_navigation_button {
+            width: 100% !important;
+            transform: translateX(0.625rem);
+        }
+        .st-key-header_navigation_button [data-testid="stButton"] {
+            display: flex;
+            justify-content: flex-end;
+            width: 100%;
+        }
+        .st-key-header_navigation_button [data-testid="stBaseButton-secondary"] {
+            width: fit-content !important;
+            flex: 0 0 auto;
+        }
         </style>
         """,
         unsafe_allow_html=True,

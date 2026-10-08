@@ -14,7 +14,7 @@ def Calc_Page_View_En(help_page_en, calc_page_de, calc_page_en):
     with col_language:
         language_selection(calc_page_de, calc_page_en, "English")
     with col_btn:
-        if st.button("Help", width="content"):
+        if st.button("Help", width="content", key="header_navigation_button"):
             st.switch_page(help_page_en)
 
     st.info(
