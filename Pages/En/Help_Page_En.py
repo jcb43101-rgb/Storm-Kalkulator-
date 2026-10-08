@@ -42,7 +42,7 @@ def Help_Page_View_En(calc_page_en, help_page_de, help_page_en):
 
 
 
-    tutorial_text, tutorial_video = st.columns([1, 1], wrap=False)
+    tutorial_text, tutorial_video = st.columns([1.7, 1], wrap=False)
         
     with tutorial_text:
         st.title("Instructions & Information")
