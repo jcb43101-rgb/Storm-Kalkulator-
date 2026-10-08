@@ -43,10 +43,9 @@ def Help_Page_View_En(calc_page_en, help_page_de, help_page_en):
 
 
 
-
-tutorial_text, tutorial_video = st.columns([3, 1])
+    tutorial_text, tutorial_video = st.columns([3, 1])
         
-with tutorial_text:
+    with tutorial_text:
         st.write("In order to calculate the Load you will need to supply all your devices on your film set," 
         "the first thing you need to do is create an inventory list of every device and its technical specs." 
         "The most important specs to include are: Wattage, Amps, if it is 1 or 3 phasic and if its AC or DC." 
@@ -64,7 +63,7 @@ with tutorial_text:
         "(four) fit your needs best. You can then print and distribute the pdfs to your team!The specific math"
         "formulations we use in our algorithm will be shared below." "Break a Leg!")
  
-with tutorial_video:
+    with tutorial_video:
         st.header("Video Tutorial in English")
         st.video("https://www.youtube.com/watch?v=aYwB4hNAf7A")
 

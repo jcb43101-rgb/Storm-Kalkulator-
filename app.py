@@ -9,17 +9,17 @@ from Pages.De.Help_Page_De import Help_Page_View_De
 
 from Pages.En.Help_Page_En import Help_Page_View_En
 from Pages.En.Calc_Page_En import Calc_Page_View_En
-
+from Pages.En.Help_Page_En import Help_Page_Tutorial_View_En
 ########## App Function
 
 def run_calc_page_de():
     Calc_Page_View_De(help_page_de, calc_page_de, calc_page_en)
 
 def run_help_page_de():
-    Help_Page_View_De(calc_page_de, help_page_de, help_page_en)
+    Help_Page_View_De (calc_page_de, help_page_de, help_page_en)
 
 def run_calc_page_en():
-    Calc_Page_View_En(help_page_en, calc_page_de, calc_page_en)
+    Calc_Page_View_En (help_page_en, calc_page_de, calc_page_en)
 
 def run_help_page_en():
     Help_Page_View_En(calc_page_en, help_page_de, help_page_en)
