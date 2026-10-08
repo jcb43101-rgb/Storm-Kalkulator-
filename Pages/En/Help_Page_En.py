@@ -5,7 +5,7 @@ import streamlit as st
 from Utilities.Language_Selection import apply_header_styles, language_selection
 
 
-def Help_Page_View_En(calc_page_en, help_page_de, help_page_en):
+def Help_Page_View_En(calc_page_en, help_page_de, help_page_en, language_pages=None):
     apply_header_styles()
     col_title, col_controls = st.columns(
         [0.56, 0.44], vertical_alignment="bottom", wrap=False
@@ -20,7 +20,12 @@ def Help_Page_View_En(calc_page_en, help_page_de, help_page_en):
             gap="small",
             key="header_controls",
         ):
-            language_selection(help_page_de, help_page_en, "English")
+            language_selection(
+                help_page_de,
+                help_page_en,
+                "English",
+                additional_pages=language_pages,
+            )
             if st.button(
                 "Calculator",
                 width="content",

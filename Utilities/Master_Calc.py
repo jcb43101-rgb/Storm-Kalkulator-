@@ -1,16 +1,22 @@
 import math
-from typing import Literal
 
 import pandas as pd
 import streamlit as st
 
+from Utilities.PDF_Translations import PDF_REPORT_LABELS
+from Utilities.Translations import Locale, UI_TEXT as NEW_LOCALE_UI_TEXT
+from Utilities.pdf_helpers import generate_pdf_report, get_pdf_font_family
 from Utilities.pdf_helpers_De import REPORT_LABELS as DE_REPORT_LABELS
-from Utilities.pdf_helpers_De import generate_pdf_report_De
 from Utilities.pdf_helpers_En import REPORT_LABELS as EN_REPORT_LABELS
-from Utilities.pdf_helpers_En import generate_pdf_report_En
 
 
 STANDARD_GENERATORS_KVA = [3, 6, 10, 15, 20, 30, 45, 60, 80, 100, 150, 200, 300]
+
+REPORT_LABELS_BY_LANGUAGE = {
+    "de": DE_REPORT_LABELS,
+    "en": EN_REPORT_LABELS,
+    **PDF_REPORT_LABELS,
+}
 
 UI_TEXT = {
     "de": {
@@ -44,6 +50,7 @@ UI_TEXT = {
         "total_active_power": "Gesamte Wirkleistung",
         "voltage": "Spannung",
         "calculated_current": "Berechneter Strom",
+        "phase": "Phase",
         "phase_title": "🔌 Automatischer Drehstrom-Phasenabgleich (L1 / L2 / L3)",
         "phase_caption": (
             "400V-Drehstromgeräte werden automatisch gleichmäßig zu je 1/3 auf "
@@ -90,6 +97,7 @@ UI_TEXT = {
         "total_active_power": "Total Active Power",
         "voltage": "Voltage",
         "calculated_current": "Calculated Current",
+        "phase": "Phase",
         "phase_title": "🔌 Automatic Three-Phase Balancing (L1 / L2 / L3)",
         "phase_caption": (
             "400 V three-phase equipment is distributed evenly across L1, L2, "
@@ -106,6 +114,7 @@ UI_TEXT = {
         "phase_current": "{amps} A @ 230 V",
     },
 }
+UI_TEXT.update(NEW_LOCALE_UI_TEXT)
 
 
 def get_next_standard_generator(min_kva: float) -> float:
@@ -122,7 +131,7 @@ def render_calculations(
     project_name: str,
     director: str,
     gaffer: str,
-    language: Literal["de", "en"],
+    language: Locale,
 ) -> None:
     """Calculate loads and render the localized results and PDF export."""
     if language not in UI_TEXT:
@@ -282,7 +291,7 @@ def render_calculations(
                 phase_kw = phase_watts[phase] / 1000.0
                 phase_amps = round(phase_watts[phase] / 230.0, 2)
                 st.metric(
-                    f"Phase {phase}",
+                    f"{text['phase']} {phase}",
                     f"{phase_kw:.2f} kW",
                     text["phase_current"].format(amps=phase_amps),
                 )
@@ -293,7 +302,7 @@ def render_calculations(
     with tab_export:
         st.subheader(text["create_report"])
         st.write(text["choose_report"])
-        report_labels = EN_REPORT_LABELS if language == "en" else DE_REPORT_LABELS
+        report_labels = REPORT_LABELS_BY_LANGUAGE[language]
         report_options = list(report_labels["report_types"])
         pdf_type = st.selectbox(text["report_type"], options=report_options)
         report_arguments = {
@@ -311,10 +320,13 @@ def render_calculations(
             "phase_watts": phase_watts,
             "phases": phases,
         }
-        if language == "en":
-            active_buffer, file_suffix = generate_pdf_report_En(**report_arguments)
-        else:
-            active_buffer, file_suffix = generate_pdf_report_De(**report_arguments)
+        regular_font, bold_font = get_pdf_font_family(language)
+        active_buffer, file_suffix = generate_pdf_report(
+            **report_arguments,
+            labels=report_labels,
+            regular_font=regular_font,
+            bold_font=bold_font,
+        )
 
         st.download_button(
             label=text["download"].format(label=pdf_type.split(" ", 1)[-1]),

@@ -1,4 +1,5 @@
 import io
+from pathlib import Path
 from typing import TypedDict
 from xml.sax.saxutils import escape
 
@@ -6,6 +7,8 @@ import pandas as pd
 from reportlab.lib import colors
 from reportlab.lib.pagesizes import A4
 from reportlab.lib.styles import getSampleStyleSheet
+from reportlab.pdfbase import pdfmetrics
+from reportlab.pdfbase.ttfonts import TTFont
 from reportlab.platypus import Paragraph, SimpleDocTemplate, Spacer, Table, TableStyle
 
 
@@ -47,14 +50,50 @@ class ReportLabels(TypedDict):
     report_types: dict[str, tuple[str, str]]
 
 
-def _table(rows: list[list[object]], widths: list[int]) -> Table:
+_REGISTERED_FONT_FAMILIES: set[str] = set()
+
+
+def get_pdf_font_family(locale: str) -> tuple[str, str]:
+    family = "NotoSansDevanagari" if locale == "hi" else "NotoSans"
+    if family not in _REGISTERED_FONT_FAMILIES:
+        font_dir = Path(__file__).resolve().parents[1] / "fonts"
+        regular_name = f"{family}-Regular"
+        bold_name = f"{family}-Bold"
+        regular_path = font_dir / f"{regular_name}.ttf"
+        bold_path = font_dir / f"{bold_name}.ttf"
+        for font_path in (regular_path, bold_path):
+            if not font_path.is_file():
+                raise FileNotFoundError(f"Required PDF font file not found: {font_path}")
+        pdfmetrics.registerFont(
+            TTFont(regular_name, str(regular_path), shapable=True)
+        )
+        pdfmetrics.registerFont(TTFont(bold_name, str(bold_path), shapable=True))
+        pdfmetrics.registerFontFamily(
+            family,
+            normal=regular_name,
+            bold=bold_name,
+            italic=regular_name,
+            boldItalic=bold_name,
+        )
+        _REGISTERED_FONT_FAMILIES.add(family)
+    return f"{family}-Regular", f"{family}-Bold"
+
+
+def _table(
+    rows: list[list[object]],
+    widths: list[int],
+    *,
+    regular_font: str = "Helvetica",
+    bold_font: str = "Helvetica-Bold",
+) -> Table:
     table = Table(rows, colWidths=widths, repeatRows=1, hAlign="LEFT")
     table.setStyle(
         TableStyle(
             [
                 ("BACKGROUND", (0, 0), (-1, 0), colors.HexColor("#2C3E50")),
                 ("TEXTCOLOR", (0, 0), (-1, 0), colors.white),
-                ("FONTNAME", (0, 0), (-1, 0), "Helvetica-Bold"),
+                ("FONTNAME", (0, 0), (-1, 0), bold_font),
+                ("FONTNAME", (0, 1), (-1, -1), regular_font),
                 ("FONTSIZE", (0, 0), (-1, -1), 8),
                 ("VALIGN", (0, 0), (-1, -1), "TOP"),
                 ("GRID", (0, 0), (-1, -1), 0.5, colors.lightgrey),
@@ -88,6 +127,8 @@ def generate_pdf_report(
     phase_watts: dict[str, float],
     phases: dict[str, list[str]],
     labels: ReportLabels,
+    regular_font: str = "Helvetica",
+    bold_font: str = "Helvetica-Bold",
 ) -> tuple[io.BytesIO, str]:
     try:
         report_kind, file_suffix = labels["report_types"][pdf_type]
@@ -101,6 +142,19 @@ def generate_pdf_report(
         "department": "department_report_title",
     }[report_kind]
     styles = getSampleStyleSheet()
+    styles["Title"].fontName = bold_font
+    styles["Heading2"].fontName = bold_font
+    styles["Heading3"].fontName = bold_font
+    styles["BodyText"].fontName = regular_font
+
+    def localized_table(rows: list[list[object]], widths: list[int]) -> Table:
+        return _table(
+            rows,
+            widths,
+            regular_font=regular_font,
+            bold_font=bold_font,
+        )
+
     buffer = io.BytesIO()
     document = SimpleDocTemplate(
         buffer,
@@ -140,7 +194,7 @@ def generate_pdf_report(
                     f"{row['Apparent_kVA']:.2f} kVA",
                 ]
             )
-        story.append(_table(rows, [145, 120, 120, 120]))
+        story.append(localized_table(rows, [145, 120, 120, 120]))
 
     def append_equipment_table(equipment: pd.DataFrame) -> None:
         rows: list[list[object]] = [
@@ -166,11 +220,11 @@ def generate_pdf_report(
                     f"{row['Strom_Amps']:.2f} A",
                 ]
             )
-        story.append(_table(rows, [130, 76, 38, 60, 55, 65, 65]))
+        story.append(localized_table(rows, [130, 76, 38, 60, 55, 65, 65]))
 
     if report_kind == "full":
         story.append(
-            _table(
+            localized_table(
                 [
                     [labels["total"], f"{total_kw:.2f} kW"],
                     [labels["current"], f"{total_amps_230v:.2f} A"],
@@ -185,7 +239,7 @@ def generate_pdf_report(
             [
                 Spacer(1, 14),
                 Paragraph(escape(labels["phase_distribution"]), styles["Heading2"]),
-                _table(
+                localized_table(
                     [
                         [labels["phase_assignment"], labels["active_power"], labels["current_230"]],
                         *[
@@ -225,7 +279,7 @@ def generate_pdf_report(
         story.extend(
             [
                 Paragraph(escape(labels["balancing"]), styles["Heading2"]),
-                _table(
+                localized_table(
                     [
                         [labels["phase_assignment"], labels["active_power"], labels["current_230"]],
                         *[

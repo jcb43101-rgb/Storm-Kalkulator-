@@ -1,12 +1,12 @@
 import streamlit as st
 
+from Utilities.Translations import LOCALE_NAMES
 
-def _switch_language(german_page, english_page):
+
+def _switch_language(pages: dict[str, st.Page]):
     selected_language = st.session_state["language_selection"]
-    pages = {
-        "Deutsch": german_page,
-        "English": english_page,
-    }
+    if selected_language not in pages:
+        raise ValueError(f"Unsupported language selection: {selected_language}")
     st.switch_page(pages[selected_language])
 
 
@@ -84,20 +84,32 @@ def apply_header_styles():
     )
 
 
-def language_selection(german_page, english_page, current_language):
-    st.session_state["language_selection"] = None
-    language_options = {
-        "Deutsch": "Deutsch 🇩🇪",
-        "English": "English 🇬🇧",
+def language_selection(
+    german_page,
+    english_page,
+    current_language,
+    *,
+    additional_pages: dict[str, st.Page] | None = None,
+):
+    pages = {
+        LOCALE_NAMES["de"]: german_page,
+        LOCALE_NAMES["en"]: english_page,
+        **(additional_pages or {}),
     }
+    language_options = {name: name for name in pages}
+    selected_current_language = {
+        "Deutsch": LOCALE_NAMES["de"],
+        "English": LOCALE_NAMES["en"],
+    }.get(current_language, current_language)
     placeholder = (
         "Sprache wählen 🇩🇪"
-        if current_language == "Deutsch"
+        if selected_current_language.startswith(("Deutsch",))
         else "Select language 🇬🇧"
     )
+    st.session_state["language_selection"] = None
     st.selectbox(
         "Language / Sprache",
-        options=["Deutsch", "English"],
+        options=list(language_options),
         key="language_selection",
         index=None,
         placeholder=placeholder,
@@ -105,5 +117,5 @@ def language_selection(german_page, english_page, current_language):
         format_func=language_options.__getitem__,
         width="stretch",
         on_change=_switch_language,
-        args=(german_page, english_page),
+        args=(pages,),
     )

@@ -5,7 +5,7 @@ from Utilities.Master_Calc import render_calculations
 from Utilities.Language_Selection import apply_header_styles, language_selection
 
 
-def Calc_Page_View_En(help_page_en, calc_page_de, calc_page_en):
+def Calc_Page_View_En(help_page_en, calc_page_de, calc_page_en, language_pages=None):
     apply_header_styles()
     col_title, col_controls = st.columns(
         [0.56, 0.44], vertical_alignment="bottom", wrap=False
@@ -20,7 +20,12 @@ def Calc_Page_View_En(help_page_en, calc_page_de, calc_page_en):
             gap="small",
             key="header_controls",
         ):
-            language_selection(calc_page_de, calc_page_en, "English")
+            language_selection(
+                calc_page_de,
+                calc_page_en,
+                "English",
+                additional_pages=language_pages,
+            )
             if st.button(
                 "Help/Information",
                 width="content",
