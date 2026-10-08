@@ -42,7 +42,7 @@ def Help_Page_View_En(calc_page_en, help_page_de, help_page_en):
 
 
 
-    tutorial_text, tutorial_video = st.columns([2.5, 1])
+    tutorial_text, tutorial_video = st.columns([2.5, 1], wrap=False)
         
     with tutorial_text:
         st.title("Instructions & Information")
@@ -64,7 +64,7 @@ def Help_Page_View_En(calc_page_en, help_page_de, help_page_en):
         "formulations we use in our algorithm will be shared below." "Break a Leg!")
  
     with tutorial_video:
-        st.header("Video Tutorial in English")
+        st.title("Video Tutorial in English")
         st.video("https://www.youtube.com/watch?v=aYwB4hNAf7A")
 
 st.info("Learn about the math and formulas used in the online calculator.")
