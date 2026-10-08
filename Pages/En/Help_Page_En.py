@@ -6,16 +6,16 @@ from Utilities.Language_Selection import language_selection
 
 
 def Help_Page_View_En(calc_page_en, help_page_de, help_page_en):
-    col_title, col_btn, col_language = st.columns(
-        [0.68, 0.16, 0.16], vertical_alignment="bottom"
+    col_title, col_language, col_btn = st.columns(
+        [0.72, 0.12, 0.16], vertical_alignment="bottom", wrap=False
     )
     with col_title:
         st.title("❓ Help & Documentation")
+    with col_language:
+        language_selection(help_page_de, help_page_en, "English")
     with col_btn:
         if st.button("⬅️ Back to Calculator", use_container_width=True):
             st.switch_page(calc_page_en)
-    with col_language:
-        language_selection(help_page_de, help_page_en, "English")
 
     st.info(
         "**Important:** This calculator is a planning aid and does not replace "

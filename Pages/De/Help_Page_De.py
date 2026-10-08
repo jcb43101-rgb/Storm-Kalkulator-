@@ -6,16 +6,16 @@ from Utilities.Language_Selection import language_selection
 
 
 def Help_Page_View_De(calc_page_de, help_page_de, help_page_en):
-    col_title, col_btn, col_language = st.columns(
-        [0.68, 0.16, 0.16], vertical_alignment="bottom"
+    col_title, col_language, col_btn = st.columns(
+        [0.72, 0.12, 0.16], vertical_alignment="bottom", wrap=False
     )
     with col_title:
         st.title("❓ Hilfe & Dokumentation")
+    with col_language:
+        language_selection(help_page_de, help_page_en, "Deutsch")
     with col_btn:
         if st.button("⬅️ Zurück zum Rechner", use_container_width=True):
             st.switch_page(calc_page_de)
-    with col_language:
-        language_selection(help_page_de, help_page_en, "Deutsch")
 
     st.info("*Wichtige Hinweise* das Rechner ist ein Werkzeug zur Vorplanung und "
             "ersetzt keine professionelle Elektroplanung. "
