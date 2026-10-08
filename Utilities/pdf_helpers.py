@@ -7,6 +7,7 @@ import pandas as pd
 from reportlab.lib import colors
 from reportlab.lib.pagesizes import A4
 from reportlab.lib.styles import getSampleStyleSheet
+from reportlab.lib.enums import TA_RIGHT
 from reportlab.pdfbase import pdfmetrics
 from reportlab.pdfbase.ttfonts import TTFont
 from reportlab.platypus import Paragraph, SimpleDocTemplate, Spacer, Table, TableStyle
@@ -54,7 +55,11 @@ _REGISTERED_FONT_FAMILIES: set[str] = set()
 
 
 def get_pdf_font_family(locale: str) -> tuple[str, str]:
-    family = "NotoSansDevanagari" if locale == "hi" else "NotoSans"
+    family = {
+        "hi": "NotoSansDevanagari",
+        "ar": "NotoSansArabic",
+        "he": "NotoSansHebrew",
+    }.get(locale, "NotoSans")
     if family not in _REGISTERED_FONT_FAMILIES:
         font_dir = Path(__file__).resolve().parents[1] / "fonts"
         regular_name = f"{family}-Regular"
@@ -85,8 +90,11 @@ def _table(
     *,
     regular_font: str = "Helvetica",
     bold_font: str = "Helvetica-Bold",
+    right_to_left: bool = False,
 ) -> Table:
-    table = Table(rows, colWidths=widths, repeatRows=1, hAlign="LEFT")
+    alignment = "RIGHT" if right_to_left else "LEFT"
+    table = Table(rows, colWidths=widths, repeatRows=1, hAlign=alignment)
+    cell_style = "RIGHT" if right_to_left else "LEFT"
     table.setStyle(
         TableStyle(
             [
@@ -96,6 +104,7 @@ def _table(
                 ("FONTNAME", (0, 1), (-1, -1), regular_font),
                 ("FONTSIZE", (0, 0), (-1, -1), 8),
                 ("VALIGN", (0, 0), (-1, -1), "TOP"),
+                ("ALIGN", (0, 0), (-1, -1), cell_style),
                 ("GRID", (0, 0), (-1, -1), 0.5, colors.lightgrey),
                 ("LEFTPADDING", (0, 0), (-1, -1), 5),
                 ("RIGHTPADDING", (0, 0), (-1, -1), 5),
@@ -129,6 +138,7 @@ def generate_pdf_report(
     labels: ReportLabels,
     regular_font: str = "Helvetica",
     bold_font: str = "Helvetica-Bold",
+    right_to_left: bool = False,
 ) -> tuple[io.BytesIO, str]:
     try:
         report_kind, file_suffix = labels["report_types"][pdf_type]
@@ -146,14 +156,19 @@ def generate_pdf_report(
     styles["Heading2"].fontName = bold_font
     styles["Heading3"].fontName = bold_font
     styles["BodyText"].fontName = regular_font
+    if right_to_left:
+        for style_name in ("Title", "Heading2", "Heading3", "BodyText"):
+            styles[style_name].alignment = TA_RIGHT
 
     def localized_table(rows: list[list[object]], widths: list[int]) -> Table:
-        return _table(
+        table = _table(
             rows,
             widths,
             regular_font=regular_font,
             bold_font=bold_font,
+            right_to_left=right_to_left,
         )
+        return table
 
     buffer = io.BytesIO()
     document = SimpleDocTemplate(

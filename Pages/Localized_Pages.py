@@ -28,7 +28,7 @@ def render_localized_calculator(
     help_pages: dict[str, st.Page],
 ) -> None:
     text = lambda key: _text(locale, key)
-    apply_header_styles()
+    apply_header_styles(locale)
     title_column, controls_column = st.columns(
         [0.56, 0.44], vertical_alignment="bottom", wrap=False
     )
@@ -163,7 +163,7 @@ def render_localized_help(
     help_pages: dict[str, st.Page],
 ) -> None:
     text = lambda key: _text(locale, key)
-    apply_header_styles()
+    apply_header_styles(locale)
     title_column, controls_column = st.columns(
         [0.56, 0.44], vertical_alignment="bottom", wrap=False
     )
@@ -215,7 +215,19 @@ def render_localized_help(
 
     tutorial_text, tutorial_video = st.columns([2.5, 1], wrap=False)
     with tutorial_text:
-        st.write(text("help_intro"))
+        st.write(
+            "\n\n".join(
+                text(key)
+                for key in (
+                    "help_intro",
+                    "help_workflow",
+                    "help_analysis",
+                    "help_phase",
+                    "help_reports",
+                    "help_limits",
+                )
+            )
+        )
     with tutorial_video:
         st.video("https://www.youtube.com/watch?v=aYwB4hNAf7A", width="stretch")
         for image_name in (

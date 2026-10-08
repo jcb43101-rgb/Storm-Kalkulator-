@@ -1,6 +1,10 @@
 from typing import Literal
 
-Locale = Literal["de", "en", "hi", "pl", "de_ch", "fr", "ru"]
+from Utilities.Extended_Translations import EXTENDED_PAGE_TEXT, EXTENDED_UI_TEXT
+
+Locale = Literal[
+    "de", "en", "hi", "pl", "de_ch", "fr", "ru", "es", "pt", "it", "ar", "he"
+]
 
 LOCALE_NAMES = {
     "de": "Deutsch 🇩🇪",
@@ -10,6 +14,26 @@ LOCALE_NAMES = {
     "de_ch": "Deutsch (Schweiz) 🇨🇭",
     "fr": "Français 🇫🇷",
     "ru": "Русский 🇷🇺",
+    "es": "Español 🇪🇸",
+    "pt": "Português 🇵🇹",
+    "it": "Italiano 🇮🇹",
+    "ar": "العربية 🇸🇦",
+    "he": "עברית 🇮🇱",
+}
+
+LANGUAGE_PROMPTS: dict[str, str] = {
+    "de": "Sprache wählen 🇩🇪",
+    "en": "Select language 🇬🇧",
+    "hi": "भाषा चुनें 🇮🇳",
+    "pl": "Wybierz język 🇵🇱",
+    "de_ch": "Sprache wählen 🇨🇭",
+    "fr": "Choisir la langue 🇫🇷",
+    "ru": "Выберите язык 🇷🇺",
+    "es": "Elegir idioma 🇪🇸",
+    "pt": "Escolher idioma 🇵🇹",
+    "it": "Seleziona la lingua 🇮🇹",
+    "ar": "اختر اللغة 🇸🇦",
+    "he": "בחירת שפה 🇮🇱",
 }
 
 UI_TEXT: dict[str, dict[str, str | list[str]]] = {
@@ -332,3 +356,10 @@ PAGE_TEXT: dict[str, dict[str, str | list[str]]] = {
         "default_gaffer": "Участник съёмочной группы",
     },
 }
+
+UI_TEXT.update(EXTENDED_UI_TEXT)
+for _locale, _text in EXTENDED_PAGE_TEXT.items():
+    if _locale in PAGE_TEXT:
+        PAGE_TEXT[_locale].update(_text)
+    else:
+        PAGE_TEXT[_locale] = _text

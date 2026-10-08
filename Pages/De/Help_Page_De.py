@@ -58,7 +58,7 @@ def Help_Page_View_De(calc_page_de, help_page_de, help_page_en, language_pages=N
         with tutorial_text_title:
             st.title("Anleitung & Informationen")
         with tutorial_video_title:
-            st.title("Video-Tutorial auf Deutsch")
+            st.title("Video-Tutorial auf Englisch")
     
     tutorial_text, tutorial_video = st.columns([2.5, 1], wrap=False)
             

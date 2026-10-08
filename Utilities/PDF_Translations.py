@@ -1,4 +1,5 @@
 from Utilities.pdf_helpers import ReportLabels
+from Utilities.PDF_Additional_Translations import ADDITIONAL_PDF_REPORT_LABELS
 
 PDF_REPORT_LABELS: dict[str, ReportLabels] = {
     "hi": {
@@ -212,3 +213,5 @@ PDF_REPORT_LABELS: dict[str, ReportLabels] = {
         },
     },
 }
+
+PDF_REPORT_LABELS.update(ADDITIONAL_PDF_REPORT_LABELS)

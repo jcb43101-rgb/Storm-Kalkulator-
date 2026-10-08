@@ -1,6 +1,6 @@
 import streamlit as st
 
-from Utilities.Translations import LOCALE_NAMES
+from Utilities.Translations import LANGUAGE_PROMPTS, LOCALE_NAMES
 
 
 def _switch_language(pages: dict[str, st.Page]):
@@ -10,10 +10,18 @@ def _switch_language(pages: dict[str, st.Page]):
     st.switch_page(pages[selected_language])
 
 
-def apply_header_styles():
+def apply_header_styles(locale: str = "en"):
+    direction = "rtl" if locale in {"ar", "he"} else "ltr"
+    text_alignment = "right" if direction == "rtl" else "left"
+    direction_styles = (
+        f".stApp {{ direction: {direction}; }} "
+        f".stApp [data-testid=\"stMarkdownContainer\"] "
+        f"{{ text-align: {text_alignment}; }}"
+    )
     st.markdown(
         """
         <style>
+        __DIRECTION_STYLES__
         .stHorizontalBlock:has(> [data-testid="stColumn"] h1)
         > [data-testid="stColumn"]:first-child {
             container-type: inline-size;
@@ -79,7 +87,7 @@ def apply_header_styles():
             }
         }
         </style>
-        """,
+        """.replace("__DIRECTION_STYLES__", direction_styles),
         unsafe_allow_html=True,
     )
 
@@ -97,14 +105,13 @@ def language_selection(
         **(additional_pages or {}),
     }
     language_options = {name: name for name in pages}
-    selected_current_language = {
-        "Deutsch": LOCALE_NAMES["de"],
-        "English": LOCALE_NAMES["en"],
-    }.get(current_language, current_language)
-    placeholder = (
-        "Sprache wählen 🇩🇪"
-        if selected_current_language.startswith(("Deutsch",))
-        else "Select language 🇬🇧"
+    current_locale = next(
+        (
+            locale
+            for locale, name in LOCALE_NAMES.items()
+            if name == current_language or name.startswith(f"{current_language} ")
+        ),
+        "en",
     )
     st.session_state["language_selection"] = None
     st.selectbox(
@@ -112,7 +119,7 @@ def language_selection(
         options=list(language_options),
         key="language_selection",
         index=None,
-        placeholder=placeholder,
+        placeholder=LANGUAGE_PROMPTS[current_locale],
         label_visibility="collapsed",
         format_func=language_options.__getitem__,
         width="stretch",

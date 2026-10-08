@@ -56,7 +56,7 @@ help_pages = {
     LOCALE_NAMES["en"]: help_page_en,
 }
 
-for locale in ("hi", "pl", "de_ch", "fr", "ru"):
+for locale in ("hi", "pl", "de_ch", "fr", "ru", "es", "pt", "it", "ar", "he"):
     locale_name = LOCALE_NAMES[locale]
     calculator_pages[locale_name] = st.Page(
         make_localized_calculator(locale),

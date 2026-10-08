@@ -326,6 +326,7 @@ def render_calculations(
             labels=report_labels,
             regular_font=regular_font,
             bold_font=bold_font,
+            right_to_left=language in {"ar", "he"},
         )
 
         st.download_button(

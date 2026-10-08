@@ -1,6 +1,7 @@
 # Storm-Kalkulator-
 
 The app includes calculator and help pages in German, English, Hindi, Polish,
-Swiss Standard German, French, and Russian. PDF reports for all seven
-languages use the Noto Sans fonts; the bundled fonts and their SIL Open Font
-Licenses are in `fonts/`.
+Swiss Standard German, French, Russian, Spanish, Portuguese, Italian, Arabic,
+and Hebrew. PDF reports are localized for every supported language. Bundled
+Noto Sans fonts (including script-specific Devanagari, Arabic, and Hebrew
+families) and their SIL Open Font Licenses are in `fonts/`.

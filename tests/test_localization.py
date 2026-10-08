@@ -7,7 +7,7 @@ from Utilities.Master_Calc import (
     UI_TEXT,
 )
 from Utilities.PDF_Translations import PDF_REPORT_LABELS
-from Utilities.Translations import LOCALE_NAMES, PAGE_TEXT
+from Utilities.Translations import LANGUAGE_PROMPTS, LOCALE_NAMES, PAGE_TEXT
 from Utilities.pdf_helpers import generate_pdf_report, get_pdf_font_family
 
 
@@ -21,6 +21,7 @@ class LocalizationTests(unittest.TestCase):
         self.assertEqual(locales, set(REPORT_LABELS_BY_LANGUAGE))
         self.assertEqual(locales - {"de", "en"}, set(PDF_REPORT_LABELS))
         self.assertEqual(locales - {"de", "en"}, set(PAGE_TEXT))
+        self.assertEqual(locales, set(LANGUAGE_PROMPTS))
 
         for locale in locales - {"de", "en"}:
             with self.subTest(locale=locale):
@@ -28,6 +29,14 @@ class LocalizationTests(unittest.TestCase):
                 self.assertEqual(expected_page_keys, set(PAGE_TEXT[locale]))
                 self.assertEqual(5, len(PAGE_TEXT[locale]["departments"]))
                 self.assertEqual(5, len(PAGE_TEXT[locale]["sample_equipment"]))
+                for key in (
+                    "help_workflow",
+                    "help_analysis",
+                    "help_phase",
+                    "help_reports",
+                    "help_limits",
+                ):
+                    self.assertTrue(PAGE_TEXT[locale][key])
 
     def test_localized_pdf_reports_embed_their_unicode_font(self):
         equipment = pd.DataFrame(
@@ -57,6 +66,10 @@ class LocalizationTests(unittest.TestCase):
         for locale, labels in PDF_REPORT_LABELS.items():
             with self.subTest(locale=locale):
                 regular_font, bold_font = get_pdf_font_family(locale)
+                if locale == "ar":
+                    self.assertEqual("NotoSansArabic-Regular", regular_font)
+                elif locale == "he":
+                    self.assertEqual("NotoSansHebrew-Regular", regular_font)
                 report_type = next(iter(labels["report_types"]))
                 report, _ = generate_pdf_report(
                     pdf_type=report_type,
