@@ -7,7 +7,7 @@ from reportlab.lib.pagesizes import A4
 from reportlab.lib.styles import ParagraphStyle, getSampleStyleSheet
 from reportlab.platypus import Paragraph, SimpleDocTemplate, Spacer, Table, TableStyle
 
-# Set page config at the very entrypoint
+# Set page config at the entrypoint
 st.set_page_config(page_title="Filmlicht & Stromrechner", layout="wide")
 
 # --- Page Definitions ---
@@ -538,5 +538,6 @@ def help_page_view():
 calc_page = st.Page(main_calculator, title="Stromrechner", icon="⚡", default=True)
 help_page = st.Page(help_page_view, title="Hilfe", icon="❓")
 
-pg = st.navigation([calc_page, help_page])
+# Set position="hidden" to completely remove the sidebar navigation UI
+pg = st.navigation([calc_page, help_page], position="hidden")
 pg.run()
