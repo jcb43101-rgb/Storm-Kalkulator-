@@ -540,10 +540,13 @@ def help_page_view():
     # Empty placeholder section for you to fill out
     #
     st.title("Anleitung & Informationen")
-    youtube_url = "https://www.youtube.com/watch?v=aYwB4hNAf7A"
-    st.header("Video-Tutorial auf Deutsch                      Video-Tutorial auf Englisch")
-    st.video("https://www.youtube.com/watch?v=aYwB4hNAf7A", width=500) 
-    st.video("https://www.youtube.com/watch?v=aYwB4hNAf7A", width=500)
+    video_de, video_en = st.columns(2)
+    with video_de:
+        st.header("Video-Tutorial auf Deutsch")
+        st.video("https://www.youtube.com/watch?v=aYwB4hNAf7A", width=500)
+    with video_en:
+        st.header("Video-Tutorial auf Englisch")
+        st.video("https://www.youtube.com/watch?v=aYwB4hNAf7A", width=500)
     st.info("Erklären des Mathematik und wie die Formelle funktionieren im Online-Rechner.")
     st.image(Path(__file__).parent / "photos" / "400VAmps.png")
 
