@@ -13,16 +13,16 @@ from Pages.En.Calc_Page_En import Calc_Page_View_En
 ########## App Function
 
 def run_calc_page_de():
-    Calc_Page_View_De(help_page_de)
+    Calc_Page_View_De(help_page_de, calc_page_de, calc_page_en)
 
 def run_help_page_de():
-    Help_Page_View_De(calc_page_de)
+    Help_Page_View_De(calc_page_de, help_page_de, help_page_en)
 
 def run_calc_page_en():
-    Calc_Page_View_En(help_page_en)
+    Calc_Page_View_En(help_page_en, calc_page_de, calc_page_en)
 
 def run_help_page_en():
-    Help_Page_View_En(calc_page_en)
+    Help_Page_View_En(calc_page_en, help_page_de, help_page_en)
 
 
 # Set page config at the entrypoint
@@ -38,5 +38,8 @@ calc_page_en = st.Page(run_calc_page_en, title="Power Calculator", icon="⚡")
 help_page_en = st.Page(run_help_page_en, title="Help", icon="❓")
 
 # Set position="hidden" to completely remove the sidebar navigation UI
-pg = st.navigation([calc_page_de, help_page_de], position="hidden")
+pg = st.navigation(
+    [calc_page_de, help_page_de, calc_page_en, help_page_en],
+    position="hidden",
+)
 pg.run()

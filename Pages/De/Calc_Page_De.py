@@ -2,17 +2,19 @@ import pandas as pd
 import streamlit as st
 
 from Utilities.Master_Calc import render_calculations
+from Utilities.Language_Selection import language_selection
 
 
-def Calc_Page_View_De(help_page_de):
-    # Top header with right-aligned button
-    col_title, col_btn = st.columns([0.8, 0.2])
+def Calc_Page_View_De(help_page_de, calc_page_de, calc_page_en):
+    col_title, col_btn, col_language = st.columns([0.68, 0.16, 0.16])
     with col_title:
         st.title("⚡ Filmset Strom- & Lastenrechner")
     with col_btn:
         st.write("")  # Vertical spacing adjustment
         if st.button("❓ Hilfe / Info", use_container_width=True):
             st.switch_page(help_page_de)
+    with col_language:
+        language_selection(calc_page_de, calc_page_en, "Deutsch")
 
     st.info("*Wichtige Hinweise* das Rechner ist ein Werkzeug zur Vorplanung und "
                         "ersetzt keine professionelle Elektroplanung. "
