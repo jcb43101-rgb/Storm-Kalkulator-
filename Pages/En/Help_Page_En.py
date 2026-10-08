@@ -36,38 +36,45 @@ def Help_Page_View_En(calc_page_en, help_page_de, help_page_en):
 
     st.divider()
 
-    
-
-      # Create two equal-width columns for the video and text
-    tutorial_text_title, tutorial_video_title = st.columns([2, 1])
-    with tutorial_text_title:    
-        st.title("Instructions & Information")
-    with tutorial_video_title:
-        st.title("Video Tutorial in English")
+    st.markdown(
+        """
+        <style>
+        .st-key-tutorial_titles :is(h1, h2, h3, h4, h5, h6) {
+            white-space: nowrap;
+            font-size: 1.25rem;
+        }
+        </style>
+        """,
+        unsafe_allow_html=True,
+    )
+    with st.container(key="tutorial_titles"):
+        tutorial_text_title, tutorial_video_title = st.columns(2)
+        with tutorial_text_title:
+            st.subheader("Instructions & Information")
+        with tutorial_video_title:
+            st.subheader("Video Tutorial in English")
 
     tutorial_text, tutorial_video = st.columns([2.5, 1], wrap=False)
         
     with tutorial_text:
-        st.write("In order to calculate the Load you will need to supply all your devices on your film set," 
-        "the first thing you need to do is create an inventory list of every device and its technical specs." 
-        "The most important specs to include are: Wattage, Amps, if it is 1 or 3 phasic and if its AC or DC." 
-        "You also need to include how many of each device you are going to be using, and if on a larger set," 
-        "which department the device belongs to, i.e. Production, audio, video, catering, or lighting." 
+        st.write("In order to calculate the Load you will need to supply all your devices on your film set, " 
+        "the first thing you need to do is create an inventory list of every device and its technical specs. " 
+        "The most important specs to include are: Wattage, Amps, if it is 1 or 3 phasic and if its AC or DC. " 
+        "You also need to include how many of each device you are going to be using, and if on a larger set, " 
+        "which department the device belongs to, i.e. Production, audio, video, catering, or lighting. " 
         "You can create this list on our online calculator but it does not automatically save, so be careful," 
-        "refreshing the page will cause the data to be reset! You can also create a csv file with the device list" 
-        "data and upload it to be automatically filled into our calculator. As you are filling in the device list" 
-        "on the calculator page, our mathematical algorithm automatically updates the calculations at the bottom"
-        "of the page to take all the devices into account. You can then sort by different views of the data," 
-        "including specs per device or by department. If you are using 3phase power or generators there is also" 
-        "a tab to recommend a way to divide the devices among the three phases to ensure that power is distributed" 
-        "equally. Each phase should be within 10% kVA of one another. The last tab is where you can export a pdf"
-        "of the data from your device list, there are four different structures and you can choose which one or"
-        "(four) fit your needs best. You can then print and distribute the pdfs to your team!The specific math"
-        "formulations we use in our algorithm will be shared below." "Break a Leg!")
+        "refreshing the page will cause the data to be reset! You can also create a csv file with the device list " 
+        "data and upload it to be automatically filled into our calculator. As you are filling in the device list " 
+        "on the calculator page, our mathematical algorithm automatically updates the calculations at the bottom "
+        "of the page to take all the devices into account. You can then sort by different views of the data, " 
+        "including specs per device or by department. If you are using 3phase power or generators there is also " 
+        "a tab to recommend a way to divide the devices among the three phases to ensure that power is distributed " 
+        "equally. Each phase should be within 10% kVA of one another. The last tab is where you can export a pdf "
+        "of the data from your device list, there are four different structures and you can choose which one or "
+        "(four) fit your needs best. You can then print and distribute the pdfs to your team!The specific math "
+        "formulations we use in our algorithm will be shared below." "Break a Leg! ")
         st.info("Learn about the math and formulas used in the online calculator.")
     
     with tutorial_video:
-        st.video("https://www.youtube.com/watch?v=aYwB4hNAf7A")
+        st.video("https://www.youtube.com/watch?v=aYwB4hNAf7A", width=500)
         st.image(Path(__file__).resolve().parents[2] / "photos" / "400VAmps.png", width=500)
-
-
