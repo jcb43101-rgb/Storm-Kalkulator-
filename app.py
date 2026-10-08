@@ -541,8 +541,9 @@ def help_page_view():
     #
     st.title("Anleitung & Informationen")
     youtube_url = "https://www.youtube.com/watch?v=aYwB4hNAf7A"
-    st.header("Video-Tutorial auf Deutsch")
-    st.video("https://www.youtube.com/watch?v=aYwB4hNAf7A", width=640)
+    st.header("Video-Tutorial auf Deutsch                      Video-Tutorial auf Englisch")
+    st.video("https://www.youtube.com/watch?v=aYwB4hNAf7A", width=500) 
+    st.video("https://www.youtube.com/watch?v=aYwB4hNAf7A", width=500)
     st.info("Erklären des Mathematik und wie die Formelle funktionieren im Online-Rechner.")
     st.image(Path(__file__).parent / "photos" / "400VAmps.png")
 
