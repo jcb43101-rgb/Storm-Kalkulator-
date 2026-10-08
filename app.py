@@ -1,5 +1,6 @@
 import io
 import math
+from pathlib import Path
 import pandas as pd
 import streamlit as st
 from reportlab.lib import colors
@@ -538,8 +539,7 @@ def help_page_view():
     st.header("Video-Tutorial auf Deutsch")
     embedded_video_url = "https://www.youtube.com/embed/=aYwB4hNAf7A"
     st.info("Erklären des Mathematik und wie die Formelle funktionieren im Online-Rechner.")
-    body="" 
-print(src="C:\Projects\FilmSetPower\photos\400VAmps.png")
+    st.image(Path(__file__).parent / "photos" / "400VAmps.png")
 
 # --- Page Routing Setup ---
 calc_page = st.Page(main_calculator, title="Stromrechner", icon="⚡", default=True)
