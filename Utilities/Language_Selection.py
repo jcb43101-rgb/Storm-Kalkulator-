@@ -36,8 +36,7 @@ def apply_header_styles():
             max-width: 100%;
         }
         .st-key-language_selection {
-            flex: 0 0 156px !important;
-            max-width: 156px;
+            flex: 0 1 max-content !important;
         }
         .st-key-language_selection [data-baseweb="select"] {
             width: max-content !important;
@@ -65,6 +64,18 @@ def apply_header_styles():
                 flex: 1 1 100% !important;
                 width: 100% !important;
                 min-width: 0 !important;
+            }
+            .st-key-header_controls {
+                width: calc(100% + 8px) !important;
+                margin-left: -8px;
+                gap: 4px !important;
+            }
+        }
+        @media (max-width: 380px) {
+            .st-key-header_controls {
+                width: 100% !important;
+                margin-left: 0;
+                flex-direction: column !important;
             }
         }
         </style>

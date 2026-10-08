@@ -8,7 +8,7 @@ from Utilities.Language_Selection import apply_header_styles, language_selection
 def Help_Page_View_De(calc_page_de, help_page_de, help_page_en):
     apply_header_styles()
     col_title, col_controls = st.columns(
-        [0.62, 0.38], vertical_alignment="bottom", wrap=False
+        [0.56, 0.44], vertical_alignment="bottom", wrap=False
     )
     with col_title:
         st.title("❓ Hilfe & Dokumentation")

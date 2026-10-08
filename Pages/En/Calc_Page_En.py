@@ -8,7 +8,7 @@ from Utilities.Language_Selection import apply_header_styles, language_selection
 def Calc_Page_View_En(help_page_en, calc_page_de, calc_page_en):
     apply_header_styles()
     col_title, col_controls = st.columns(
-        [0.62, 0.38], vertical_alignment="bottom", wrap=False
+        [0.56, 0.44], vertical_alignment="bottom", wrap=False
     )
     with col_title:
         st.title("⚡ Film Set Power & Load Calculator")
