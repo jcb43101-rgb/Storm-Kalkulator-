@@ -1,10 +1,10 @@
 import pandas as pd
 import streamlit as st
-from Pages.De.Help_Page_De import Help_Page_View_De 
+
 from Utilities.Master_Calc import render_calculations
 
 
-def Calc_Page_View_De(Help_Page_View_De):
+def Calc_Page_View_De(help_page_de):
     # Top header with right-aligned button
     col_title, col_btn = st.columns([0.8, 0.2])
     with col_title:
@@ -12,7 +12,7 @@ def Calc_Page_View_De(Help_Page_View_De):
     with col_btn:
         st.write("")  # Vertical spacing adjustment
         if st.button("❓ Hilfe / Info", use_container_width=True):
-            st.switch_page(Help_Page_View_De)
+            st.switch_page(help_page_de)
 
     st.info("*Wichtige Hinweise* das Rechner ist ein Werkzeug zur Vorplanung und "
                         "ersetzt keine professionelle Elektroplanung. "

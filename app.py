@@ -3,29 +3,26 @@ import streamlit as st
 ######## De Page Imports
 
 from Pages.De.Calc_Page_De import Calc_Page_View_De
-from Pages.De.Help_Page_De import help_page_view_de
+from Pages.De.Help_Page_De import Help_Page_View_De
 
 #########   En Page Imports
 
 from Pages.En.Help_Page_En import Help_Page_View_En
 from Pages.En.Calc_Page_En import Calc_Page_View_En
 
-##########  Utilities Imports
-from Utilities import Master_Calc
-
 ########## App Function
 
 def run_calc_page_de():
-    Calc_Page_View_De(help_page_view_de)
+    Calc_Page_View_De(help_page_de)
 
 def run_help_page_de():
-    help_page_view_de(Calc_Page_View_De)
+    Help_Page_View_De(calc_page_de)
 
 def run_calc_page_en():
-    Calc_Page_View_En(Help_Page_View_En)
+    Calc_Page_View_En(help_page_en)
 
 def run_help_page_en():
-    Help_Page_View_En(Calc_Page_View_En)
+    Help_Page_View_En(calc_page_en)
 
 
 # Set page config at the entrypoint
