@@ -530,9 +530,16 @@ def help_page_view():
     st.divider()
 
     # Empty placeholder section for you to fill out
-    st.subheader("Anleitung & Informationen")
-    st.info("Trage hier deine Hilfetexte, Erklärungen oder FAQs ein.")
-
+    #
+    st.title("Anleitung & Informationen")
+    st.subheader("*Wichtige Hinweise* das Rechner ist ein Werkzeug zur Vorplanung und "
+    "ersetzt keine professionelle Elektroplanung. "
+    "Bitte prüfe alle Berechnungen und Empfehlungen sorgfältig.")
+    st.header("Video-Tutorial auf Deutsch")
+    embedded_video_url = "https://www.youtube.com/embed/=aYwB4hNAf7A"
+    st.info("Erklären des Mathematik und wie die Formelle funktionieren im Online-Rechner.")
+    body="" 
+print(src="C:\Projects\FilmSetPower\photos\400VAmps.png")
 
 # --- Page Routing Setup ---
 calc_page = st.Page(main_calculator, title="Stromrechner", icon="⚡", default=True)
