@@ -11,7 +11,7 @@ def _switch_language(german_page, english_page):
 
 
 def language_selection(german_page, english_page, current_language):
-    st.session_state["language_selection"] = current_language
+    st.session_state["language_selection"] = None
     language_options = {
         "Deutsch": "🇩🇪 Deutsch",
         "English": "🇬🇧 English",
@@ -39,7 +39,8 @@ def language_selection(german_page, english_page, current_language):
         """,
         unsafe_allow_html=True,
     )
-    label = (
+    label = "Sprache wählen" if current_language == "Deutsch" else "Select language"
+    placeholder = (
         "🇩🇪 Sprache wählen"
         if current_language == "Deutsch"
         else "🇬🇧 Select language"
@@ -48,6 +49,9 @@ def language_selection(german_page, english_page, current_language):
         label,
         options=["Deutsch", "English"],
         key="language_selection",
+        index=None,
+        placeholder=placeholder,
+        label_visibility="collapsed",
         format_func=language_options.__getitem__,
         width="stretch",
         on_change=_switch_language,
