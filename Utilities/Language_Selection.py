@@ -18,6 +18,9 @@ def apply_header_styles():
         > [data-testid="stColumn"]:first-child {
             container-type: inline-size;
         }
+        .stHorizontalBlock:has(> [data-testid="stColumn"] h1) {
+            overflow: visible !important;
+        }
         .stHorizontalBlock:has(> [data-testid="stColumn"] h1)
         > [data-testid="stColumn"]:first-child h1 {
             white-space: nowrap;
@@ -41,8 +44,6 @@ def apply_header_styles():
         }
         .st-key-header_controls {
             gap: 0.5rem !important;
-            position: relative;
-            left: 0.625rem;
         }
         .st-key-header_navigation_button {
             width: fit-content !important;
@@ -64,9 +65,6 @@ def apply_header_styles():
             .st-key-language_selection {
                 flex: 0 0 156px !important;
                 max-width: 156px;
-            }
-            .st-key-header_controls {
-                left: 0;
             }
         }
         </style>
