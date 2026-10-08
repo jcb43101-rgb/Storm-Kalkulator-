@@ -523,21 +523,24 @@ def help_page_view():
     col_title, col_btn = st.columns([0.8, 0.2])
     with col_title:
         st.title("❓ Hilfe & Dokumentation")
-        st.info("*Wichtige Hinweise* das Rechner ist ein Werkzeug zur Vorplanung und "
-                "ersetzt keine professionelle Elektroplanung. "
-                "Bitte prüfe alle Berechnungen und Empfehlungen sorgfältig.")
     with col_btn:
         st.write("")
         if st.button("⬅️ Zurück zum Rechner", use_container_width=True):
             st.switch_page(calc_page)
+
+    st.info("*Wichtige Hinweise* das Rechner ist ein Werkzeug zur Vorplanung und "
+            "ersetzt keine professionelle Elektroplanung. "
+            "Bitte prüfe alle Berechnungen und Empfehlungen sorgfältig.")
 
     st.divider()
 
     # Empty placeholder section for you to fill out
     #
     st.title("Anleitung & Informationen")
-    st.info("Video-Tutorial auf Deutsch")
-    embedded_video_url = "https://www.youtube.com/embed/=aYwB4hNAf7A"
+    youtube_url = "https://www.youtube.com/watch?v=aYwB4hNAf7A"
+    st.header("Video-Tutorial auf Deutsch")
+    st.video("https://www.youtube.com/watch?v=aYwB4hNAf7A")
+    st.link_button("Auf YouTube ansehen", "https://www.youtube.com/watch?v=aYwB4hNAf7A")
     st.info("Erklären des Mathematik und wie die Formelle funktionieren im Online-Rechner.")
     st.image(Path(__file__).parent / "photos" / "400VAmps.png")
 
