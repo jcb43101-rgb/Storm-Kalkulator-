@@ -7,14 +7,14 @@ from Utilities.Language_Selection import language_selection
 
 def Calc_Page_View_En(help_page_en, calc_page_de, calc_page_en):
     col_title, col_language, col_btn = st.columns(
-        [0.72, 0.12, 0.16], vertical_alignment="bottom", wrap=False
+        [0.70, 0.20, 0.10], vertical_alignment="bottom", wrap=False
     )
     with col_title:
         st.title("⚡ Film Set Power & Load Calculator")
     with col_language:
         language_selection(calc_page_de, calc_page_en, "English")
     with col_btn:
-        if st.button("❓ Help / Information", use_container_width=True):
+        if st.button("Help", width="content"):
             st.switch_page(help_page_en)
 
     st.info(

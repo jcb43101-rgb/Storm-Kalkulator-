@@ -13,8 +13,8 @@ def _switch_language(german_page, english_page):
 def language_selection(german_page, english_page, current_language):
     st.session_state["language_selection"] = None
     language_options = {
-        "Deutsch": "🇩🇪 Deutsch",
-        "English": "🇬🇧 English",
+        "Deutsch": "Deutsch 🇩🇪",
+        "English": "English 🇬🇧",
     }
     st.markdown(
         """
@@ -32,6 +32,14 @@ def language_selection(german_page, english_page, current_language):
         .st-key-language_selection [data-testid="stSelectbox"] input {
             cursor: default !important;
         }
+        .st-key-language_selection,
+        .st-key-language_selection [data-testid="stSelectbox"] {
+            width: max-content !important;
+            max-width: 100%;
+        }
+        .st-key-language_selection [data-baseweb="select"] {
+            width: max-content !important;
+        }
         .st-key-language_selection [data-testid="stSelectbox"] input {
             caret-color: transparent !important;
         }
@@ -39,14 +47,13 @@ def language_selection(german_page, english_page, current_language):
         """,
         unsafe_allow_html=True,
     )
-    label = "Sprache wählen" if current_language == "Deutsch" else "Select language"
     placeholder = (
-        "🇩🇪 Sprache wählen"
+        "Sprache wählen 🇩🇪"
         if current_language == "Deutsch"
-        else "🇬🇧 Select language"
+        else "Select language 🇬🇧"
     )
     st.selectbox(
-        label,
+        "Language / Sprache",
         options=["Deutsch", "English"],
         key="language_selection",
         index=None,
