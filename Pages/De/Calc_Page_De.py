@@ -6,11 +6,12 @@ from Utilities.Language_Selection import language_selection
 
 
 def Calc_Page_View_De(help_page_de, calc_page_de, calc_page_en):
-    col_title, col_btn, col_language = st.columns([0.68, 0.16, 0.16])
+    col_title, col_btn, col_language = st.columns(
+        [0.68, 0.16, 0.16], vertical_alignment="bottom"
+    )
     with col_title:
         st.title("⚡ Filmset Strom- & Lastenrechner")
     with col_btn:
-        st.write("")  # Vertical spacing adjustment
         if st.button("❓ Hilfe / Info", use_container_width=True):
             st.switch_page(help_page_de)
     with col_language:

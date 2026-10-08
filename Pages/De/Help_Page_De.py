@@ -6,11 +6,12 @@ from Utilities.Language_Selection import language_selection
 
 
 def Help_Page_View_De(calc_page_de, help_page_de, help_page_en):
-    col_title, col_btn, col_language = st.columns([0.68, 0.16, 0.16])
+    col_title, col_btn, col_language = st.columns(
+        [0.68, 0.16, 0.16], vertical_alignment="bottom"
+    )
     with col_title:
         st.title("❓ Hilfe & Dokumentation")
     with col_btn:
-        st.write("")
         if st.button("⬅️ Zurück zum Rechner", use_container_width=True):
             st.switch_page(calc_page_de)
     with col_language:
