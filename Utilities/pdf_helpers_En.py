@@ -2,7 +2,7 @@ import io
 
 import pandas as pd
 
-from Utilities.pdf_helpers_De import ReportLabels, generate_pdf_report
+from Utilities.pdf_helpers import ReportLabels, generate_pdf_report
 
 
 REPORT_LABELS: ReportLabels = {

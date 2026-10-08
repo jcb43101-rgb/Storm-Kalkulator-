@@ -2,7 +2,7 @@ import math
 
 import pandas as pd
 import streamlit as st
-from Utilities.pdf_helpers import generate_pdf_report_De as generate_pdf_report
+from Utilities.pdf_helpers_De import generate_pdf_report_De as generate_pdf_report
 
 
 def main_calculator_de(help_page_de):
@@ -296,5 +296,4 @@ def main_calculator_de(help_page_de):
                 file_name=f"{project_name.lower().replace(' ', '_')}_{file_suffix}.pdf",
                 mime="application/pdf",
             )
-
 
