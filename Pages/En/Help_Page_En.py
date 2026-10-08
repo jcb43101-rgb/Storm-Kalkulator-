@@ -41,7 +41,7 @@ def Help_Page_View_En(calc_page_en, help_page_de, help_page_en):
         <style>
         .st-key-tutorial_titles :is(h1, h2, h3, h4, h5, h6) {
             white-space: nowrap;
-            font-size: 1.7rem;
+            font-size: 2.5rem;
         }
         </style>
         """,
