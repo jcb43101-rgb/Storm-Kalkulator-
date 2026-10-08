@@ -37,6 +37,9 @@ def Help_Page_View_En(calc_page_en, help_page_de, help_page_en):
     st.divider()
 
     st.title("Instructions & Information")
+
+    st.columns([1, 1])  # Create two equal-width columns for the video and text
+
 tutorial_text, tutorial_video = st.columns([3, 1])
  
 with tutorial_text:
