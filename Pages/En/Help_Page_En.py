@@ -64,9 +64,10 @@ def Help_Page_View_En(calc_page_en, help_page_de, help_page_en):
         "of the data from your device list, there are four different structures and you can choose which one or"
         "(four) fit your needs best. You can then print and distribute the pdfs to your team!The specific math"
         "formulations we use in our algorithm will be shared below." "Break a Leg!")
+        st.info("Learn about the math and formulas used in the online calculator.")
+    
     with tutorial_video:
         st.video("https://www.youtube.com/watch?v=aYwB4hNAf7A")
+        st.image(Path(__file__).resolve().parents[2] / "photos" / "400VAmps.png", width=500)
 
-st.info("Learn about the math and formulas used in the online calculator.")
-    
-st.image(Path(__file__).resolve().parents[2] / "photos" / "400VAmps.png")
+
