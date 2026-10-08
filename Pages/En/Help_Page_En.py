@@ -41,14 +41,17 @@ def Help_Page_View_En(calc_page_en, help_page_de, help_page_en):
         <style>
         .st-key-tutorial_titles :is(h1, h2, h3, h4, h5, h6) {
             white-space: nowrap;
-            font-size: 2.5rem;
+            font-size: 1.7rem;
+        }
+        .st-key-tutorial_titles [data-testid="stColumn"]:last-child h1 {
+            text-align: right;
         }
         </style>
         """,
         unsafe_allow_html=True,
     )
     with st.container(key="tutorial_titles"):
-        tutorial_text_title, tutorial_video_title = st.columns(2)
+        tutorial_text_title, tutorial_video_title = st.columns([2.5, 1])
         with tutorial_text_title:
             st.title("Instructions & Information")
         with tutorial_video_title:
