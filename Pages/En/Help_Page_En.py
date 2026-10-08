@@ -39,13 +39,15 @@ def Help_Page_View_En(calc_page_en, help_page_de, help_page_en):
     
 
       # Create two equal-width columns for the video and text
+    tutorial_text_title, tutorial_video_title = st.columns([1, 1], wrap=False)
+    with tutorial_text_title:    
+        st.title("Instructions & Information")
+    with tutorial_video_title:
+        st.title("Video Tutorial in English")
 
-
-
-    tutorial_text, tutorial_video = st.columns([1.7, 1], wrap=False)
+    tutorial_text, tutorial_video = st.columns([2.5, 1], wrap=False)
         
     with tutorial_text:
-        st.title("Instructions & Information")
         st.write("In order to calculate the Load you will need to supply all your devices on your film set," 
         "the first thing you need to do is create an inventory list of every device and its technical specs." 
         "The most important specs to include are: Wattage, Amps, if it is 1 or 3 phasic and if its AC or DC." 
@@ -62,9 +64,7 @@ def Help_Page_View_En(calc_page_en, help_page_de, help_page_en):
         "of the data from your device list, there are four different structures and you can choose which one or"
         "(four) fit your needs best. You can then print and distribute the pdfs to your team!The specific math"
         "formulations we use in our algorithm will be shared below." "Break a Leg!")
- 
     with tutorial_video:
-        st.title("Video Tutorial in English")
         st.video("https://www.youtube.com/watch?v=aYwB4hNAf7A")
 
 st.info("Learn about the math and formulas used in the online calculator.")
