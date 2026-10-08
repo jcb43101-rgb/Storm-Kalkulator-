@@ -82,11 +82,23 @@ def Help_Page_View_En(calc_page_en, help_page_de, help_page_en):
         st.info("Learn about the math and formulas used in the online calculator.")
     
     with tutorial_video:
-        st.video("https://www.youtube.com/watch?v=aYwB4hNAf7A", width=500)
-        st.image(Path(__file__).resolve().parents[2] / "photos" / "400VAmps.png", width=500)
-        st.image(Path(__file__).resolve().parents[2] / "photos" / "230VAmps.png", width=500)
-        st.image(Path(__file__).resolve().parents[2] / "photos" / "kW.pF.kVA.png", width=500)
-        st.image(Path(__file__).resolve().parents[2] / "photos" / "kWx1000.W.png", width=500)
+        st.video("https://www.youtube.com/watch?v=aYwB4hNAf7A", width="stretch")
+        st.image(
+            Path(__file__).resolve().parents[2] / "photos" / "400VAmps.png",
+            width="stretch",
+        )
+        st.image(
+            Path(__file__).resolve().parents[2] / "photos" / "230VAmps.png",
+            width="stretch",
+        )
+        st.image(
+            Path(__file__).resolve().parents[2] / "photos" / "kW.pF.kVA.png",
+            width="stretch",
+        )
+        st.image(
+            Path(__file__).resolve().parents[2] / "photos" / "kWx1000.W.png",
+            width="stretch",
+        )
 
     st.subheader("How the calculator estimates your set's power")
     st.write(

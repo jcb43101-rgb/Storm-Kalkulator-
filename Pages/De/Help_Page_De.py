@@ -95,11 +95,23 @@ def Help_Page_View_De(calc_page_de, help_page_de, help_page_en):
     )
         
     with tutorial_video:
-            st.video("https://www.youtube.com/watch?v=aYwB4hNAf7A", width=500)
-            st.image(Path(__file__).resolve().parents[2] / "photos" / "400VAmps.png", width=500)
-            st.image(Path(__file__).resolve().parents[2] / "photos" / "230VAmps.png", width=500)
-            st.image(Path(__file__).resolve().parents[2] / "photos" / "kW.pF.kVA.png", width=500)
-            st.image(Path(__file__).resolve().parents[2] / "photos" / "kWx1000.W.png", width=500)
+        st.video("https://www.youtube.com/watch?v=aYwB4hNAf7A", width="stretch")
+        st.image(
+            Path(__file__).resolve().parents[2] / "photos" / "400VAmps.png",
+            width="stretch",
+        )
+        st.image(
+            Path(__file__).resolve().parents[2] / "photos" / "230VAmps.png",
+            width="stretch",
+        )
+        st.image(
+            Path(__file__).resolve().parents[2] / "photos" / "kW.pF.kVA.png",
+            width="stretch",
+        )
+        st.image(
+            Path(__file__).resolve().parents[2] / "photos" / "kWx1000.W.png",
+            width="stretch",
+        )
 
     st.subheader("So schätzt der Rechner die elektrische Last am Set")
     st.write(
