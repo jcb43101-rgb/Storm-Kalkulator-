@@ -4,6 +4,10 @@ import pandas as pd
 import streamlit as st
 
 from Utilities.Language_Selection import apply_header_styles, language_selection
+from Utilities.Equipment_CSV_Import import (
+    CSV_IMPORT_TEXT,
+    render_equipment_csv_import,
+)
 from Utilities.Master_Calc import render_calculations
 from Utilities.Translations import LOCALE_NAMES, PAGE_TEXT, Locale
 
@@ -116,9 +120,15 @@ def render_localized_calculator(
             },
         ]
     )
-    edited_df = st.data_editor(
+    csv_text = CSV_IMPORT_TEXT[locale]
+    edited_df = render_equipment_csv_import(
         default_data,
-        num_rows="dynamic",
+        locale=locale,
+        departments=departments,
+        upload_label=csv_text["label"],
+        help_text=csv_text["help"],
+        success_text=csv_text["success"],
+        editor_key=f"equipment_editor_{locale}",
         column_config={
             "Gerätename": st.column_config.TextColumn(
                 text("equipment_name"), required=True, width="medium"
@@ -146,7 +156,6 @@ def render_localized_calculator(
                 text("voltage"), options=[230, 400], default=230
             ),
         },
-        use_container_width=True,
     )
     render_calculations(
         edited_df,

@@ -3,6 +3,10 @@ import streamlit as st
 
 from Utilities.Master_Calc import render_calculations
 from Utilities.Language_Selection import apply_header_styles, language_selection
+from Utilities.Equipment_CSV_Import import (
+    CSV_IMPORT_TEXT,
+    render_equipment_csv_import,
+)
 
 
 def Calc_Page_View_En(help_page_en, calc_page_de, calc_page_en, language_pages=None):
@@ -108,9 +112,15 @@ def Calc_Page_View_En(help_page_en, calc_page_de, calc_page_en, language_pages=N
         ]
     )
 
-    edited_df = st.data_editor(
+    csv_text = CSV_IMPORT_TEXT["en"]
+    edited_df = render_equipment_csv_import(
         default_data,
-        num_rows="dynamic",
+        locale="en",
+        departments=departments,
+        upload_label=csv_text["label"],
+        help_text=csv_text["help"],
+        success_text=csv_text["success"],
+        editor_key="equipment_editor_en",
         column_config={
             "Gerätename": st.column_config.TextColumn("Equipment Name", required=True, width="medium"),
             "Abteilung": st.column_config.SelectboxColumn(
@@ -129,7 +139,6 @@ def Calc_Page_View_En(help_page_en, calc_page_de, calc_page_en, language_pages=N
                 "Voltage (V)", options=[230, 400], default=230
             ),
         },
-        use_container_width=True,
     )
     render_calculations(
         edited_df,

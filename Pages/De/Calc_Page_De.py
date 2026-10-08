@@ -3,6 +3,10 @@ import streamlit as st
 
 from Utilities.Master_Calc import render_calculations
 from Utilities.Language_Selection import apply_header_styles, language_selection
+from Utilities.Equipment_CSV_Import import (
+    CSV_IMPORT_TEXT,
+    render_equipment_csv_import,
+)
 
 
 def Calc_Page_View_De(help_page_de, calc_page_de, calc_page_en, language_pages=None):
@@ -106,9 +110,15 @@ def Calc_Page_View_De(help_page_de, calc_page_de, calc_page_en, language_pages=N
         ]
     )
 
-    edited_df = st.data_editor(
+    csv_text = CSV_IMPORT_TEXT["de"]
+    edited_df = render_equipment_csv_import(
         default_data,
-        num_rows="dynamic",
+        locale="de",
+        departments=DEPARTMENTS,
+        upload_label=csv_text["label"],
+        help_text=csv_text["help"],
+        success_text=csv_text["success"],
+        editor_key="equipment_editor_de",
         column_config={
             "Gerätename": st.column_config.TextColumn("Gerätename", required=True, width="medium"),
             "Abteilung": st.column_config.SelectboxColumn("Abteilung", options=DEPARTMENTS, default="Licht", required=True),
@@ -117,7 +127,6 @@ def Calc_Page_View_De(help_page_de, calc_page_de, calc_page_en, language_pages=N
             "Power_Factor": st.column_config.NumberColumn("Leistungsfaktor / Cos φ (0.1 - 1.0)", min_value=0.1, max_value=1.0, step=0.01, default=0.95),
             "Spannung_V": st.column_config.SelectboxColumn("Spannung (V)", options=[230, 400], default=230),
         },
-        use_container_width=True,
     )
     render_calculations(
         edited_df,
